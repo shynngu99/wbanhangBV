@@ -3,7 +3,7 @@ import ReactDOM from 'react-dom/client';
 import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
-import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
+import { BrowserRouter as Router, Route, Routes, Link } from 'react-router-dom';
 import Blog from './cpn/Blog';
 import BlogDT from './cpn/BlogDT';
 
@@ -15,7 +15,7 @@ root.render(
       <App>
         <Routes>
           <Route path='/blog/list' element={<Blog />} />
-          <Route path='/detail' element={<BlogDT />} />
+          <Route path='/blog/detail/:blogId' element={<BlogDT />} />
         </Routes>
       </App>
     </Router>

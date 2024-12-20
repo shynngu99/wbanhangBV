@@ -1,5 +1,6 @@
 import axios from "axios"
 import { useEffect, useState } from "react"
+import { Link } from "react-router-dom"
 
 export default function Blog() {
 
@@ -23,7 +24,7 @@ export default function Blog() {
     function renderBlog() {
 
         if (data.length > 0) {
-
+                        
             return data.map((key, value) => {
                 return (
                     <div key={key} class="single-blog-post">
@@ -46,7 +47,7 @@ export default function Blog() {
                             <img src={key.image} alt="" />
                         </a>
                         <p>{key.description}</p>
-                        <a class="btn btn-primary" href="">Read More</a>
+                        <Link class="btn btn-primary" to={`/blog/detail/${key.id}`}>Read More</Link>
                     </div>
 
                 )

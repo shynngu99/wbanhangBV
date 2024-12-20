@@ -9,7 +9,7 @@ export default function BlogDT() {
     const [data, setData] = useState('')
 
     useEffect(() => {
-        axios.get('/blog/detail' + params.id)
+        axios.get('http://web2m.test/laravel8/laravel8/public/api/blog/detail/' + params.blogId)
             .then(response => {
                 setData(response.data.data)
             })
@@ -162,6 +162,9 @@ export default function BlogDT() {
                         </div>
                     </div>
                     <div class="col-sm-9">
+                        <div className="blog-detail">
+                            <h1>{data.title}</h1>
+                        </div>
                         <div class="blog-post-area">
                             <h2 class="title text-center">Latest From our Blog</h2>
                             <div class="single-blog-post">
