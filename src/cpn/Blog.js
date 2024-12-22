@@ -12,8 +12,8 @@ export default function Blog() {
                 // res.data.blog.data.key
 
                 setData(res.data.blog.data)
-
                 console.log(res);
+                // console.log(res);
             })
             .catch(error => console.log(error)
             )
@@ -23,11 +23,8 @@ export default function Blog() {
     function renderBlog() {
 
         if (data.length > 0) {
-
-            return data.map((key, value) => {
                 return (
                     <div key={key} class="single-blog-post">
-                        <h3>{key.title}</h3>
                         <div class="post-meta">
                             <ul>
                                 <li><i class="fa fa-user"></i> Mac Doe</li>
@@ -43,10 +40,7 @@ export default function Blog() {
                             </span>
                         </div>
                         <a href="">
-                            <img src={key.image} alt="" />
                         </a>
-                        <p>{key.description}</p>
-                        <a class="btn btn-primary" href="">Read More</a>
                     </div>
 
                 )
@@ -57,7 +51,6 @@ export default function Blog() {
         }
 
     }
-
     return (
         <section>
             <div class="container">
