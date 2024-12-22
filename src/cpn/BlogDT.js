@@ -7,15 +7,15 @@ export default function BlogDT() {
     let params = useParams();
 
     const [data, setData] = useState('')
-
+    console.log(data);
+    
     useEffect(() => {
-        axios.get('/blog/detail' + params.id)
+        axios.get('http://web2m.test/laravel8/laravel8/public/api/blog/detail' + params.id)
             .then(response => {
                 setData(response.data.data)
             })
             .catch(function (error) {
                 console.log(error);
-
             })
     }, [])
 

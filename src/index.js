@@ -15,7 +15,7 @@ root.render(
       <App>
         <Routes>
           <Route path='/blog/list' element={<Blog />} />
-          <Route path='/detail' element={<BlogDT />} />
+          <Route path='/blog/detail/:id' element={<BlogDT />} />
         </Routes>
       </App>
     </Router>
