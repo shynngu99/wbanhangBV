@@ -1,5 +1,5 @@
 import axios from "axios"
-import { useEffect, useState } from "react"
+import { useEffect, useState, Link } from "react"
 
 export default function Blog() {
 
@@ -10,21 +10,17 @@ export default function Blog() {
         axios.get("http://web2m.test/laravel8/laravel8/public/api/blog")
             .then(res => {
                 // res.data.blog.data.key
-
                 setData(res.data.blog.data)
-                console.log(res);
-                // console.log(res);
             })
             .catch(error => console.log(error)
             )
     }, [])
-
-
     function renderBlog() {
-
         if (data.length > 0) {
+            return data.map((value, key) => {
                 return (
                     <div key={key} class="single-blog-post">
+                        <h3>{value.title}</h3>
                         <div class="post-meta">
                             <ul>
                                 <li><i class="fa fa-user"></i> Mac Doe</li>
@@ -40,7 +36,10 @@ export default function Blog() {
                             </span>
                         </div>
                         <a href="">
+                            <img src={"http://web2m.test/laravel8/laravel8/public/upload/Blog/image/" + value['image']} />
                         </a>
+                        <p>{value.description}</p>
+                        <Link class="btn btn-primary" to={`/blog/detail/${value.id}`}>Read More</Link>
                     </div>
 
                 )
