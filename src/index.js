@@ -6,6 +6,7 @@ import reportWebVitals from './reportWebVitals';
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 import Blog from './cpn/Blog';
 import BlogDT from './cpn/BlogDT';
+import IndexAccount from './menber/IndexAccount';
 
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
@@ -16,6 +17,7 @@ root.render(
         <Routes>
           <Route path='/blog/list' element={<Blog />} />
           <Route path='/blog/detail/:id' element={<BlogDT />} />
+          <Route path='/index/account' element={<IndexAccount />} />
         </Routes>
       </App>
     </Router>

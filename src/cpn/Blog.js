@@ -1,5 +1,6 @@
 import axios from "axios"
-import { useEffect, useState, Link } from "react"
+import { useEffect, useState } from "react"
+import { Link } from "react-router-dom"
 
 export default function Blog() {
 
@@ -9,6 +10,8 @@ export default function Blog() {
     useEffect(() => {
         axios.get("http://web2m.test/laravel8/laravel8/public/api/blog")
             .then(res => {
+                console.log(res);
+
                 // res.data.blog.data.key
                 setData(res.data.blog.data)
             })
@@ -39,9 +42,8 @@ export default function Blog() {
                             <img src={"http://web2m.test/laravel8/laravel8/public/upload/Blog/image/" + value['image']} />
                         </a>
                         <p>{value.description}</p>
-                        <Link class="btn btn-primary" to={`/blog/detail/${value.id}`}>Read More</Link>
+                        <Link to={`/blog/detail/${value.id}`} class="btn btn-primary">Read More</Link>
                     </div>
-
                 )
             })
         }
@@ -195,9 +197,9 @@ export default function Blog() {
                     <div class="col-sm-9">
                         <div class="blog-post-area">
                             <h2 class="title text-center">Latest From our Blog</h2>
-                            <div>
-                                {renderBlog()}
-                            </div>
+
+                            {renderBlog()}
+
                             <div class="pagination-area">
                                 <ul class="pagination">
                                     <li><a href="" class="active">1</a></li>
