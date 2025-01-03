@@ -1,9 +1,12 @@
 import { useState } from "react"
 import FormError from "./FormError"
+import axios from "axios"
+import { useNavigate } from "react-router-dom"
 
 export default function Login(props) {
+    const navigate = useNavigate()
     const [inputs, setInput] = useState({
-        name: "",
+        password: "",
         email: ""
     })
     const [errors, setErrors] = useState({})
@@ -21,8 +24,8 @@ export default function Login(props) {
         let errorSubmit = {}
         let flag = true
 
-        if (inputs.name == "") {
-            errorSubmit.name = "Vui lòng nhập Tên"
+        if (inputs.password == "") {
+            errorSubmit.password = "Vui lòng nhập Password"
             flag = false
         }
         if (inputs.email == "") {
@@ -32,7 +35,26 @@ export default function Login(props) {
         if (!flag) {
             setErrors(errorSubmit)
         } else {
-            setErrors({})
+            // xử lý điều kiện
+            const data = {
+                email: inputs.email,
+                password: inputs.password,
+                level: 0
+            }
+            axios.post("http://web2m.test/laravel8/laravel8/public/api/login", data)
+                .then((res) => {
+                    // console.log(res);
+                    if (res.data.errors) {
+                        setErrors(res.data.errors)
+                    } else {
+                        console.log(res);
+                        navigate('/')
+                    }
+                })
+                .catch(function (error) {
+                    console.log(error);
+
+                })
         }
     }
 
@@ -40,15 +62,16 @@ export default function Login(props) {
         <div class="login-form">
             <h2>Login to your account</h2>
             <form action="#" onSubmit={stopS}>
-                <input type="text" name="name" placeholder="Name" onChange={handldeInput} />
+
                 <input type="email" name="email" placeholder="Email Address" onChange={handldeInput} />
+                <input type="text" name="password" placeholder="Password" onChange={handldeInput} />
                 <span>
                     <input type="checkbox" class="checkbox" />
                     Keep me signed in
                 </span>
                 <button type="submit" class="btn btn-default">Login</button>
             </form>
-            <FormError errors={errors}/>
+            <FormError errors={errors} />
         </div>
     )
 }

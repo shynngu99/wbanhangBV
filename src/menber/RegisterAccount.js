@@ -15,7 +15,11 @@ export default function RegisterAccount(props) {
     })
     const [errors, setErrors] = useState({})
     const [getFile, setFile] = useState("")
+    // console.log(getFile);
+
     const [getAvatar, setAvatar] = useState("")
+    // console.log(getAvatar);
+
 
     const handldeInput = (e) => {
         const nameInput = e.target.name
@@ -23,10 +27,15 @@ export default function RegisterAccount(props) {
         setInput(state => ({ ...state, [nameInput]: valueInput }))
     }
     function handleUserInputFile(e) {
-        const file = e.target.files
-        setFile(file[0])
 
-        
+        // xử lý tại  js 
+        const file = e.target.files
+        setFile(file)
+        console.log(getFile);
+
+
+
+        // send file to api server
         let reader = new FileReader();
         reader.onload = (e) => {
             setAvatar(e.target.result)
@@ -51,24 +60,29 @@ export default function RegisterAccount(props) {
             errorSubmit.phone = "Vui lòng nhập phone"
             flag = false
         }
-        if (inputs.password == "") {
+        if (inputs.address == "") {
             errorSubmit.address = "Vui lòng nhập address"
             flag = false
         }
-        if (inputs.password == "") {
+        if (inputs.level == "") {
             errorSubmit.level = "Vui lòng nhập level"
             flag = false
         }
-        if (inputs.avatar = "") {
+        if (inputs.avatar == "") {
             errorSubmit.avatar = "Vui lòng chọn ảnh"
             flag = false
-            // } else {
-            //     let getSize = setInput.avatar['0']['size']
-            //     if (getSize > 1024 * 1024) {
-            //         console.log("hình to ");
-            //     } else {
-            //         console.log("hình OK");
-            //     }
+        }
+        else {
+            // console.log(getFile);
+            let getSize = getFile[0]['size']
+
+            console.log(getSize);
+
+            if (getSize > 1024 * 1024) {
+                console.log("hình to ");
+            } else {
+                console.log("hình OK");
+            }
         }
         if (!flag) {
             setErrors(errorSubmit)
@@ -79,7 +93,7 @@ export default function RegisterAccount(props) {
                 password: inputs.password,
                 phone: inputs.phone,
                 address: inputs.address,
-                avatar: inputs.avatar,
+                avatar: getAvatar,
                 level: 0
             }
             axios.post("http://web2m.test/laravel8/laravel8/public/api/register", data)
