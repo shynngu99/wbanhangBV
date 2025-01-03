@@ -49,11 +49,12 @@ export default function Login(props) {
                     } else {
                         console.log(res);
                         navigate('/')
+
+                        localStorage.setItem('checkLogin', true)
                     }
                 })
                 .catch(function (error) {
                     console.log(error);
-
                 })
         }
     }

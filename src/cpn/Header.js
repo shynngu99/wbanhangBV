@@ -1,4 +1,22 @@
+import { Link, useNavigate } from "react-router-dom"
 export default function Header() {
+    const navigate = useNavigate()
+    function renderLogin() {
+        let checkLogin = localStorage.getItem('checkLogin')
+        if (checkLogin) {
+            return (
+                <li><a onClick={logout}><i class="fa fa-lock"></i> logout</a></li>
+            )
+        } else {
+            return (
+                <li><Link to="/index/account" id="cart"><i class="fa fa-shopping-cart"></i>Login</Link></li >
+            )
+        }
+    }
+    function logout() {
+        localStorage.clear()
+        navigate("/index/account")
+    }
     return (
         <header id="header">
             <div class="header_top">
@@ -65,7 +83,7 @@ export default function Header() {
                                     <li><a href=""><i class="fa fa-star"></i> Wishlist</a></li>
                                     <li><a href="checkout.html"><i class="fa fa-crosshairs"></i> Checkout</a></li>
                                     <li><a href="cart.html"><i class="fa fa-shopping-cart"></i> Cart</a></li>
-                                    <li><a href="login.html"><i class="fa fa-lock"></i> Login</a></li>
+                                    {renderLogin()}
                                 </ul>
                             </div>
                         </div>

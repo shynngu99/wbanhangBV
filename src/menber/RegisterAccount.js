@@ -19,21 +19,15 @@ export default function RegisterAccount(props) {
 
     const [getAvatar, setAvatar] = useState("")
     // console.log(getAvatar);
-
-
     const handldeInput = (e) => {
         const nameInput = e.target.name
         const valueInput = e.target.value
         setInput(state => ({ ...state, [nameInput]: valueInput }))
     }
     function handleUserInputFile(e) {
-
         // xử lý tại  js 
         const file = e.target.files
         setFile(file)
-        console.log(getFile);
-
-
 
         // send file to api server
         let reader = new FileReader();
@@ -68,20 +62,19 @@ export default function RegisterAccount(props) {
             errorSubmit.level = "Vui lòng nhập level"
             flag = false
         }
-        if (inputs.avatar == "") {
+        if (getFile == "") {
             errorSubmit.avatar = "Vui lòng chọn ảnh"
             flag = false
-        }
-        else {
-            // console.log(getFile);
+        } else {
             let getSize = getFile[0]['size']
-
-            console.log(getSize);
-
-            if (getSize > 1024 * 1024) {
-                console.log("hình to ");
-            } else {
-                console.log("hình OK");
+            // console.log(getSize);
+            if (getFile > 0) {
+                if (getSize > (1024 * 1024)) {
+                    console.log("hình to ");
+                    flag = false
+                } else {
+                    console.log("hình OK");
+                }
             }
         }
         if (!flag) {
