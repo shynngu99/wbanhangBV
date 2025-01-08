@@ -1,6 +1,7 @@
 import axios from "axios";
 import React, { useState, useEffect } from "react";
 import { useParams } from "react-router-dom"
+import Comment from "../BLog/Comment";
 
 export default function BlogDT() {
 
@@ -364,22 +365,7 @@ export default function BlogDT() {
                                 </li>
                             </ul>
                         </div>
-                        <div class="replay-box">
-                            <div class="row">
-                                <div class="col-sm-12">
-                                    <h2>Leave a replay</h2>
-
-                                    <div class="text-area">
-                                        <div class="blank-arrow">
-                                            <label>Your Name</label>
-                                        </div>
-                                        <span>*</span>
-                                        <textarea name="message" rows="11"></textarea>
-                                        <a class="btn btn-primary" href="">post comment</a>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
+                        <Comment />
                     </div>
                 </div>
             </div>
