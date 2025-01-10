@@ -2,6 +2,7 @@ import axios from "axios";
 import React, { useState, useEffect } from "react";
 import { useParams } from "react-router-dom"
 import Comment from "../BLog/Comment";
+import ListComment from "../BLog/ListComment";
 
 export default function BlogDT() {
 
@@ -229,6 +230,7 @@ export default function BlogDT() {
                             <a href=""><img src="images/blog/socials.png" alt="" /></a>
                         </div>
 
+                        <ListComment />
                         {/* <!-- <div class="media commnets">
                                         <a class="pull-left" href="#">
                                             <img class="media-object" src="images/blog/man-one.jpg" alt="">

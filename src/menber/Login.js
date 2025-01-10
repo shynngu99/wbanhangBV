@@ -50,7 +50,17 @@ export default function Login(props) {
                         console.log(res);
                         navigate('/')
 
+                        // const id = res.data.Auth.id
+                        // console.log(id);
+
+                        const token = res.data.token
+                        const Auth = JSON.stringify(res.data.Auth)
+                        const dataUser = {
+                            token,
+                            Auth
+                        }
                         localStorage.setItem('checkLogin', true)
+                        localStorage.setItem('appState', dataUser)
                     }
                 })
                 .catch(function (error) {
