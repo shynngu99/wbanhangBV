@@ -5,8 +5,8 @@ export default function Comment(props) {
 
     //tạo biến cmt 
     const [comment, setComment] = useState('')
-
-
+    const formData = new FormData();
+    const idBlog = Number(props.idBlog);
 
     const handleCommnet = (e) => {
         setComment(e.target.value)
@@ -22,15 +22,12 @@ export default function Comment(props) {
         }
 
         // localStorage.setItem("appState", "")
-        let userDataJson = JSON.parse(localStorage["appState"])
-
-
-        let userData = JSON.stringify(userDataJson)
+        let userData = JSON.parse(localStorage.getItem(["appState"]));
         // const x = userData.Auth.name
         // console.log(x);
 
 
-        let url = '/blog/comment' + props.idBlog
+        let url = '/blog/comment' + idBlog
         let accessToken = userData.token
         let config = {
             headers: {
@@ -39,19 +36,18 @@ export default function Comment(props) {
                 'Accept': 'application/json'
             }
         };
-
+        
         if (!comment) {
             console.log("chưa bình luận");
         } else {
-            let formData = new formData();
-            formData.append('id_blog', props.idBlog)
+            formData.append('id_blog', idBlog)
             formData.append('id_user', userData.Auth.id)
-            formData.append('id_commnent', 0)
+            formData.append('id_comment', 0)
             formData.append('image_user', userData.Auth.image)
             formData.append('name_user', userData.Auth.name)
             formData.append('comment', comment)
 
-            axios.post("http://web2m.test/laravel8/laravel8/public/api/blog/detail", formData, config)
+            axios.post("http://web2m.test/laravel8/laravel8/public/api/blog/comment/" + idBlog, formData, config)
                 .then(res => {
                     console.log(res);
                     setComment(res.data.data)

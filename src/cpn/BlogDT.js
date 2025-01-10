@@ -367,7 +367,7 @@ export default function BlogDT() {
                                 </li>
                             </ul>
                         </div>
-                        <Comment />
+                        <Comment idBlog={params.id}/>
                     </div>
                 </div>
             </div>

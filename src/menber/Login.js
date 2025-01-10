@@ -54,11 +54,12 @@ export default function Login(props) {
                         // console.log(id);
 
                         const token = res.data.token
-                        const Auth = JSON.stringify(res.data.Auth)
-                        const dataUser = {
+                        const Auth = res.data.Auth
+                        const dataUser = JSON.stringify({
                             token,
                             Auth
-                        }
+                        });
+                        console.log('appState', dataUser);
                         localStorage.setItem('checkLogin', true)
                         localStorage.setItem('appState', dataUser)
                     }
