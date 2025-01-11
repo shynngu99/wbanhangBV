@@ -21,13 +21,11 @@ export default function Comment(props) {
             console.log("chưa đăng nhập");
         }
 
-        // localStorage.setItem("appState", "")
-        let userData = JSON.parse(localStorage.getItem(["appState"]));
-        // const x = userData.Auth.name
-        // console.log(x);
+        const userData = JSON.parse(localStorage.getItem(["appState"]));
 
 
-        let url = '/blog/comment' + idBlog
+
+        let url = "http://web2m.test/laravel8/laravel8/public/api/blog/comment/" + idBlog
         let accessToken = userData.token
         let config = {
             headers: {
@@ -36,7 +34,7 @@ export default function Comment(props) {
                 'Accept': 'application/json'
             }
         };
-        
+
         if (!comment) {
             console.log("chưa bình luận");
         } else {
@@ -47,7 +45,7 @@ export default function Comment(props) {
             formData.append('name_user', userData.Auth.name)
             formData.append('comment', comment)
 
-            axios.post("http://web2m.test/laravel8/laravel8/public/api/blog/comment/" + idBlog, formData, config)
+            axios.post(url, formData, config)
                 .then(res => {
                     console.log(res);
                     setComment(res.data.data)
@@ -57,9 +55,7 @@ export default function Comment(props) {
                 })
         }
 
-        //  else {
-        //     console.log("đăng nhập thành công");
-        // }
+
 
     }
     return (

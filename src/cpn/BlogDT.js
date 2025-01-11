@@ -230,29 +230,29 @@ export default function BlogDT() {
                             <a href=""><img src="images/blog/socials.png" alt="" /></a>
                         </div>
 
-                        <ListComment />
-                        {/* <!-- <div class="media commnets">
-                                        <a class="pull-left" href="#">
-                                            <img class="media-object" src="images/blog/man-one.jpg" alt="">
-                                        </a>
-                                        <div class="media-body">
-                                            <h4 class="media-heading">Annie Davis</h4>
-                                            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.  Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
-                                            <div class="blog-socials">
-                                                <ul>
-                                                    <li><a href=""><i class="fa fa-facebook"></i></a></li>
-                                                    <li><a href=""><i class="fa fa-twitter"></i></a></li>
-                                                    <li><a href=""><i class="fa fa-dribbble"></i></a></li>
-                                                    <li><a href=""><i class="fa fa-google-plus"></i></a></li>
-                                                </ul>
-                                                <a class="btn btn-primary" href="">Other Posts</a>
-                                            </div>
-                                        </div>
-                                    </div> --> */}
+
+                        <div class="media commnets">
+                            <a class="pull-left" href="#">
+                                <img class="media-object" src="images/blog/man-one.jpg" alt="" />
+                            </a>
+                            <div class="media-body">
+                                <h4 class="media-heading">Annie Davis</h4>
+                                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.  Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
+                                <div class="blog-socials">
+                                    <ul>
+                                        <li><a href=""><i class="fa fa-facebook"></i></a></li>
+                                        <li><a href=""><i class="fa fa-twitter"></i></a></li>
+                                        <li><a href=""><i class="fa fa-dribbble"></i></a></li>
+                                        <li><a href=""><i class="fa fa-google-plus"></i></a></li>
+                                    </ul>
+                                    <a class="btn btn-primary" href="">Other Posts</a>
+                                </div>
+                            </div>
+                        </div>
                         <div class="response-area">
                             <h2>3 RESPONSES</h2>
                             <ul class="media-list">
-                                <li class="media">
+                                {/* <li class="media">
 
                                     <a class="pull-left" href="#">
                                         <img class="media-object" src="images/blog/man-two.jpg" alt="" />
@@ -266,7 +266,8 @@ export default function BlogDT() {
                                         <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.  Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
                                         <a class="btn btn-primary" href=""><i class="fa fa-reply"></i>Replay</a>
                                     </div>
-                                </li>
+                                </li> */}
+
                                 <li class="media second-media">
                                     <a class="pull-left" href="#">
                                         <img class="media-object" src="images/blog/man-three.jpg" alt="" />
@@ -365,9 +366,10 @@ export default function BlogDT() {
                                         <a class="btn btn-primary" href=""><i class="fa fa-reply"></i>Replay</a>
                                     </div>
                                 </li>
+                                <ListComment idBlog={params.id} />
                             </ul>
                         </div>
-                        <Comment idBlog={params.id}/>
+                        <Comment idBlog={params.id} />
                     </div>
                 </div>
             </div>

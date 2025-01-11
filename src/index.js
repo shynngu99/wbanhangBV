@@ -21,6 +21,7 @@ root.render(
           <Route path='/blog/list' element={<Blog />} />
           <Route path='/blog/detail/:id' element={<BlogDT />} />
           <Route path='/index/account' element={<IndexAccount />} />
+
         </Routes>
       </App>
     </Router>
