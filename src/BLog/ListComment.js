@@ -5,9 +5,13 @@ export default function ListComment(props) {
     const [comment, setComment] = useState([])
     const idBlog = props.idBlog
     useEffect(() => {
-        axios.get("http://web2m.test/laravel8/laravel8/public/api/blog/comment/")
+        axios.get("http://web2m.test/laravel8/laravel8/public/api/blog/comment/" + idBlog)
             .then(res => {
+                console.log("------------");
+                
                 console.log(res);
+
+                console.log("------------");
                 setComment(res.data.data)
             })
     }, [])
