@@ -35,6 +35,7 @@ export default function Comment(props) {
             }
         };
 
+
         if (!comment) {
             console.log("chưa bình luận");
         } else {
