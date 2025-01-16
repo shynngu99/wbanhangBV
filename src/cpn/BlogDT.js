@@ -3,6 +3,7 @@ import React, { useState, useEffect } from "react";
 import { useParams } from "react-router-dom"
 import Comment from "../BLog/Comment";
 import ListComment from "../BLog/ListComment";
+import Rate from "../BLog/Rate";
 
 export default function BlogDT() {
 
@@ -209,7 +210,8 @@ export default function BlogDT() {
                         </div>
 
                         <div class="rating-area">
-                            <ul class="ratings">
+                            <Rate idBlog={params.id} />
+                            {/* <ul class="ratings">
                                 <li class="rate-this">Rate this item:</li>
                                 <li>
                                     <i class="fa fa-star color"></i>
@@ -219,7 +221,7 @@ export default function BlogDT() {
                                     <i class="fa fa-star"></i>
                                 </li>
                                 <li class="color">(6 votes)</li>
-                            </ul>
+                            </ul> */}
                             <ul class="tag">
                                 <li>TAG:</li>
                                 <li><a class="color" href="">Pink <span>/</span></a></li>

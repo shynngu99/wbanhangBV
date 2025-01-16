@@ -14,9 +14,9 @@ export default function ListComment(props) {
                 console.log(res);
                 setData(res.data.data)
 
-                console.log("--------1");
+                
                 console.log(res.data.data.image);
-                console.log("--------2");
+                
 
                 setComment(res.data.data.comment)
             }).catch(error => {
