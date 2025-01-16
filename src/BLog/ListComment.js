@@ -13,6 +13,11 @@ export default function ListComment(props) {
             .then(res => {
                 console.log(res);
                 setData(res.data.data)
+
+                console.log("--------1");
+                console.log(res.data.data.image);
+                console.log("--------2");
+
                 setComment(res.data.data.comment)
             }).catch(error => {
                 console.log(error)
@@ -25,7 +30,8 @@ export default function ListComment(props) {
                 return (
                     <li class="media" key={key.id}>
                         <a class="pull-left" href="#">
-                        <img src={"http://web2m.test/laravel8/laravel8/public/upload/detail/image/" + data.image} />
+                            <img src={"http://web2m.test/laravel8/laravel8/public/upload/user/avatar/" + data.image} />
+                            {/* <p>{data.image}</p> */}
                         </a>
                         <div class="media-body">
                             <ul class="sinlge-post-meta">
