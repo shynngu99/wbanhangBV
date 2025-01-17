@@ -44,11 +44,13 @@ export default function Rate(props) {
         axios.get("http://web2m.test/laravel8/laravel8/public/api/blog/rate/" + pramas.id)
             .then(res => {
                 // tạo 1 array đánh  giá
-                const rates = res.data
-                // sử dụng reduce để tính trung bình cộng
+                if (res.length > 0) {
+                    const rates = res.data
+                    // sử dụng reduce để tính trung bình cộng
 
-                const averageRating = rates.reduce((totalRatesNow, rate) => totalRatesNow + rate.rate, 0) / rates.length;
-                setRating(averageRating.toFixed(1))
+                    const averageRating = rates.reduce((totalRatesNow, rate) => totalRatesNow + rate.rate, 0) / rates.length;
+                    setRating(averageRating.toFixed(1))
+                }
             })
             .catch(error => {
                 console.log(error);

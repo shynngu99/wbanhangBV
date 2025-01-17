@@ -51,7 +51,7 @@ export default function RegisterAccount(props) {
             flag = false
         }
         if (inputs.password == "") {
-            errorSubmit.phone = "Vui lòng nhập phone"
+            errorSubmit.password = "Vui lòng nhập phone"
             flag = false
         }
         if (inputs.address == "") {
@@ -62,18 +62,28 @@ export default function RegisterAccount(props) {
             errorSubmit.level = "Vui lòng nhập level"
             flag = false
         }
+
+        const validImageExtensions = ['png', 'jpg', 'jpeg', 'PNG', 'JPG'];
         if (getFile == "") {
             errorSubmit.avatar = "Vui lòng chọn ảnh"
             flag = false
         } else {
             let getSize = getFile[0]['size']
             // console.log(getSize);
-            if (getFile > 0) {
+            if (getFile.length > 0) {
                 if (getSize > (1024 * 1024)) {
-                    console.log("hình to ");
-                    flag = false
+                    errorSubmit.avatar = "Hình ảnh vượt quá 1MB";
+                    flag = false;
                 } else {
-                    console.log("hình OK");
+                    const fileName = getFile[0].name;
+                    const fileExtension = fileName.split('.').pop();
+
+                    if (!validImageExtensions.includes(fileExtension)) {
+                        errorSubmit.avatar = "Hình ảnh có đuôi chưa hợp lệ"
+                        flag = false;
+                    } else {
+                        console.log("OK");
+                    }
                 }
             }
         }
@@ -94,6 +104,7 @@ export default function RegisterAccount(props) {
                     if (res.data.errors) {
                         setErrors(res.data.errors)
                     } else {
+                        console.log(res)
                         alert("thành công")
                     }
                 })
@@ -111,7 +122,6 @@ export default function RegisterAccount(props) {
                 <input type="text" name="address" placeholder="Address" onChange={handldeInput} />
                 <input type="text" name="level" placeholder="Level" onChange={handldeInput} />
                 <input type="file" name="avatar" placeholder="chọn Avatar" onChange={handleUserInputFile} />
-
                 <button type="submit" class="btn btn-default">Sign up</button>
             </form>
             <FormError errors={errors} />
