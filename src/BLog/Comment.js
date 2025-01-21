@@ -25,7 +25,7 @@ export default function Comment(props) {
 
 
 
-        let url = "http://web2m.test/laravel8/laravel8/public/api/blog/comment/" + idBlog
+        let url = "http://localhost/web2m/laravel8/laravel8/public/api/blog/comment/" + idBlog
         let accessToken = userData.token
         let config = {
             headers: {
@@ -41,14 +41,15 @@ export default function Comment(props) {
         } else {
             formData.append('id_blog', idBlog)
             formData.append('id_user', userData.Auth.id)
+            formData.append('pass', userData.Auth.pass)
             formData.append('id_comment', 0)
-            formData.append('image_user', userData.Auth.image)
+            formData.append('image_user', userData.Auth.avatar)
             formData.append('name_user', userData.Auth.name)
             formData.append('comment', comment)
 
             axios.post(url, formData, config)
                 .then(res => {
-                    console.log(res);
+                    // console.log(res);
                     setComment(res.data.data)
                 })
                 .catch(function (error) {

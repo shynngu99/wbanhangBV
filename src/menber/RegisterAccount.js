@@ -99,7 +99,7 @@ export default function RegisterAccount(props) {
                 avatar: getAvatar,
                 level: 0
             }
-            axios.post("http://web2m.test/laravel8/laravel8/public/api/register", data)
+            axios.post("http://localhost/web2m/laravel8/laravel8/public/api/register", data)
                 .then((res) => {
                     if (res.data.errors) {
                         setErrors(res.data.errors)

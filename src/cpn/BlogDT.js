@@ -14,7 +14,7 @@ export default function BlogDT() {
     const [data, setData] = useState('')
     const [comment, setComment] = useState([])
     useEffect(() => {
-        axios.get('http://web2m.test/laravel8/laravel8/public/api/blog/detail/' + params.id)
+        axios.get('http://localhost/web2m/laravel8/laravel8/public/api/blog/detail/' + params.id)
             .then(res => {
                 // console.log(res);
                 setData(res.data.data)
@@ -186,7 +186,7 @@ export default function BlogDT() {
                                     </span> --> */}
                                 </div>
                                 <a href="">
-                                    <img src={"http://web2m.test/laravel8/laravel8/public/upload/Blog/image/" + data.image} />
+                                    <img src={"http://localhost/web2m/laravel8/laravel8/public/upload/Blog/image/" + data.image} />
                                 </a>
                                 <p>
                                     Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.</p>

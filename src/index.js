@@ -8,7 +8,7 @@ import Blog from './cpn/Blog';
 import BlogDT from './cpn/BlogDT';
 import IndexAccount from './menber/IndexAccount';
 import Home from './cpn/Home';
-import Account from './menber/Account';
+import Update from './menber/Update';
 
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
@@ -22,7 +22,7 @@ root.render(
           <Route path='/blog/list' element={<Blog />} />
           <Route path='/blog/detail/:id' element={<BlogDT />} />
           <Route path='/index/account' element={<IndexAccount />} />
-          <Route path='/account/update' element={<Account />} />
+          <Route path='/account/update' element={<Update />} />
 
         </Routes>
       </App>

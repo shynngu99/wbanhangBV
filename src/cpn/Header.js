@@ -5,7 +5,7 @@ export default function Header() {
         let checkLogin = localStorage.getItem('checkLogin')
         if (checkLogin) {
             return (
-                <li><a onClick={logout}><i class="fa fa-lock"></i> logout</a></li>
+                <li><a onClick={logout}><i class="fa fa-lock"></i> Logout</a></li>
             )
         } else {
             return (

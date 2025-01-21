@@ -29,7 +29,7 @@ export default function Rate(props) {
             formData.append('id_user', userData.Auth.id)
             formData.append('rate', rating)
 
-            axios.get("http://web2m.test/laravel8/laravel8/public/api/blog/rate/" + idBlog, formData)
+            axios.get("http://localhost/web2m/laravel8/laravel8/public/api/blog/rate/" + idBlog, formData)
                 .then(res => {
                     console.log(res);
                     setRating(res.data.data)
@@ -41,7 +41,7 @@ export default function Rate(props) {
 
     }
     useEffect(() => {
-        axios.get("http://web2m.test/laravel8/laravel8/public/api/blog/rate/" + pramas.id)
+        axios.get("http://localhost/web2m/laravel8/laravel8/public/api/blog/rate/" + pramas.id)
             .then(res => {
                 // tạo 1 array đánh  giá
                 if (res.length > 0) {

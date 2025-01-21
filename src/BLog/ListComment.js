@@ -5,19 +5,16 @@ import { useParams } from "react-router-dom"
 export default function ListComment(props) {
     const [comment, setComment] = useState([])
     const [data, setData] = useState('')
+
     const idBlog = props.idBlog
     let pramas = useParams();
 
     useEffect(() => {
-        axios.get("http://web2m.test/laravel8/laravel8/public/api/blog/detail/" + pramas.id)
+        axios.get("http://localhost/web2m/laravel8/laravel8/public/api/blog/detail/" + pramas.id)
             .then(res => {
                 console.log(res);
                 setData(res.data.data)
-
-
                 // console.log(res.data.data.image);
-
-
                 setComment(res.data.data.comment)
             }).catch(error => {
                 console.log(error)
@@ -27,10 +24,11 @@ export default function ListComment(props) {
     function renderComment() {
         if (comment.length > 0) {
             return comment.map((value, key) => {
+
                 return (
                     <li class="media" key={key.id}>
                         <a class="pull-left" href="#">
-                            <img src={"http://web2m.test/laravel8/laravel8/public/upload/user/avatar/" + data.image} />
+                            <img width={100} height={100} src={"http://localhost/web2m/laravel8/laravel8/public/upload/user/avatar/" + value.image_user} />
                             {/* <p>{data.image}</p> */}
                         </a>
                         <div class="media-body">

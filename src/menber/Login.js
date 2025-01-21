@@ -41,7 +41,7 @@ export default function Login(props) {
                 password: inputs.password,
                 level: 0
             }
-            axios.post("http://web2m.test/laravel8/laravel8/public/api/login", data)
+            axios.post("http://localhost/web2m/laravel8/laravel8/public/api/login", data)
                 .then((res) => {
                     // console.log(res);
                     if (res.data.errors) {
@@ -51,7 +51,7 @@ export default function Login(props) {
                         navigate('/')
 
                         // const id = res.data.Auth.id
-                        // console.log(id);
+                        // console.log(id); 
 
                         const token = res.data.token
                         const Auth = res.data.Auth

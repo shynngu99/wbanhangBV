@@ -8,7 +8,7 @@ export default function Blog() {
 
 
     useEffect(() => {
-        axios.get("http://web2m.test/laravel8/laravel8/public/api/blog")
+        axios.get("http://localhost/web2m/laravel8/laravel8/public/api/blog")
             .then(res => {
                 console.log(res);
 
@@ -39,7 +39,7 @@ export default function Blog() {
                             </span>
                         </div>
                         <a href="">
-                            <img src={"http://web2m.test/laravel8/laravel8/public/upload/Blog/image/" + value['image']} />
+                            <img src={"http://localhost/web2m/laravel8/laravel8/public/upload/Blog/image/" + value['image']} />
                         </a>
                         <p>{value.description}</p>
                         <Link to={`/blog/detail/${value.id}`} class="btn btn-primary">Read More</Link>
