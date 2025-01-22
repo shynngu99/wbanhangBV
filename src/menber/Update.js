@@ -5,14 +5,15 @@ import { useParams } from "react-router-dom"
 export default function Account(props) {
 
     const idBlog = Number(props.id)
+
     const [errors, setErrors] = useState({})
     const [getFile, setFile] = useState("")
+
     const [getAvatar, setAvatar] = useState('')
     let formData = new FormData();
 
     let userData = JSON.parse(localStorage.getItem(['appState']))
 
-    let flag = true
     const [user, setUser] = useState({
         name: '',
         email: '',
@@ -32,7 +33,8 @@ export default function Account(props) {
                 address: userData.Auth.address,
                 phone: userData.Auth.phone,
                 level: userData.Auth.level,
-                avatar: userData.Auth.avatar
+                avatar: userData.Auth.avatar,
+                pass: userData.Auth.password
             })
         }
     }, [])
@@ -56,15 +58,7 @@ export default function Account(props) {
         reader.readAsDataURL(file[0])
     }
 
-    let url = "http://localhost/web2m/laravel8/laravel8/public/api/user/update" + idBlog
-    let accessToken = userData.token
-    let config = {
-        headers: {
-            'Authorization': 'Bearer ' + accessToken,
-            'Content-Type': 'application/x-www-form-urlencoded',
-            'Accept': 'application/json'
-        }
-    };
+
     function handleSubmit(e) {
         e.preventDefault();
 
@@ -75,16 +69,55 @@ export default function Account(props) {
         formData.append('image_user', userData.Auth.avatar)
         formData.append('name_user', userData.Auth.name)
         formData.append('avatar', getAvatar)
+
+
+        let url = "http://localhost/web2m/laravel8/laravel8/public/api/user/update/" + idBlog
+        let accessToken = userData.token
+        let config = {
+            headers: {
+                'Authorization': 'Bearer ' + accessToken,
+                'Content-Type': 'application/x-www-form-urlencoded',
+                'Accept': 'application/json'
+            }
+        };
+        const newUserData = {
+
+            
+            ...userData, // Sao chép tất cả các thuộc tính hiện có của object userData
+            Auth: {
+                id: user.id,
+                name: user.name,
+                phone: user.phone,
+                address: user.address,
+                level: user.level,
+                email: user.email,
+                pass: user.pass,
+                avatar: getAvatar || userData.Auth.avatar
+
+            }
+
+        }
+        localStorage.setItem('appState', JSON.stringify(newUserData));
+        // Cập nhật formData nếu cần
+        formData.append('id_blog', idBlog);
+        formData.append('id_user', userData.Auth.id);
+        formData.append('pass', newUserData.Auth.pass);
+        formData.append('id_comment', 0);
+        formData.append('image_user', newUserData.Auth.avatar);
+        formData.append('name_user', newUserData.Auth.name);
+        formData.append('avatar', getAvatar);
+
+
+        axios.post(url, formData, config)
+            .then(response => {
+                alert("Cập nhật thành công!");
+            })
+            .catch((error) => {
+                console.log(error);
+                alert("Có lỗi xảy ra!");
+            });
+
     }
-
-    axios.post(url, formData, config)
-        .then((res) => {
-            setUser(res.data.data)
-        })
-        .catch(function (error) {
-            console.log(error);
-        })
-
 
     return (
         <section>
@@ -119,8 +152,7 @@ export default function Account(props) {
                                     <input type="number" name="phone" placeholder="Phone" onChange={handleInput} value={user.phone} />
                                     <input type="text" name="address" placeholder="Address" onChange={handleInput} value={user.address} />
                                     <input type="text" name="level" placeholder="Level" onChange={handleInput} value={user.level} />
-                                    <input type="file" name="avatar" placeholder="chọn Avatar" onChange={handleInput} />
-
+                                    <input type="file" name="avatar" placeholder="chọn Avatar" onChange={handleUserInputFile} />
                                     <button type="submit" class="btn btn-default">Sign up</button>
                                 </form>
                             </div>

@@ -9,6 +9,9 @@ import BlogDT from './cpn/BlogDT';
 import IndexAccount from './menber/IndexAccount';
 import Home from './cpn/Home';
 import Update from './menber/Update';
+import MyProduct from './BLog/product/MyProduct';
+import Shop from './BLog/product/Shop';
+import Details from './BLog/product/Detail';
 
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
@@ -23,6 +26,9 @@ root.render(
           <Route path='/blog/detail/:id' element={<BlogDT />} />
           <Route path='/index/account' element={<IndexAccount />} />
           <Route path='/account/update' element={<Update />} />
+          <Route path='/myproduct' element={<MyProduct />} />
+          <Route path='/myproduct/details' element={<Details />} />
+          <Route path='/shop' element={<Shop />} />
 
         </Routes>
       </App>
