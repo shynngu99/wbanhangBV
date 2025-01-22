@@ -1,5 +1,6 @@
 export default function AccountMN() {
     return (
+        <div class="col-sm-3">
         <div class="left-sidebar">
             <h2>Account</h2>
             <div class="panel-group category-products" id="accordian">
@@ -14,6 +15,7 @@ export default function AccountMN() {
                     </div>
                 </div>
             </div>
+        </div>
         </div>
     )
 }

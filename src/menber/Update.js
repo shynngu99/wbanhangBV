@@ -83,7 +83,12 @@ export default function Account(props) {
         const newUserData = {
 
             
-            ...userData, // Sao chép tất cả các thuộc tính hiện có của object userData
+            ...userData,
+             // Sao chép tất cả các thuộc tính hiện có của object userData
+             //  để giữ lại tất cả dữ liệu cũ không liên quan đến Auth
+
+
+             //tạo auth để lưu biến đổi 
             Auth: {
                 id: user.id,
                 name: user.name,
@@ -120,26 +125,8 @@ export default function Account(props) {
     }
 
     return (
-        <section>
-            <div class="container">
-                <div class="row">
-                    <div class="col-sm-3">
-                        <div class="left-sidebar">
-                            <h2>Account</h2>
-                            <div class="panel-group category-products" id="accordian">
-                                <div class="panel panel-default">
-                                    <div class="panel-heading">
-                                        <h4 class="panel-title"><a href="#">account</a></h4>
-                                    </div>
-                                </div>
-                                <div class="panel panel-default">
-                                    <div class="panel-heading">
-                                        <h4 class="panel-title"><a href="#">My product</a></h4>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
+        
+                   
                     <div class="col-sm-9">
                         <div class="blog-post-area">
                             <h2 class="title text-center">Update user</h2>
@@ -158,8 +145,6 @@ export default function Account(props) {
                             </div>
                         </div>
                     </div>
-                </div>
-            </div>
-        </section>
+               
     )
 }
