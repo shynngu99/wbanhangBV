@@ -14,10 +14,12 @@ function App(props) {
     <div>
       <Header />
       <section>
-        <div className='contanier'>
+        <div class="container">
+          <div class="row">
 
-          <div className='row'>
-            {params1['pathname'].includes('account') ? <MenuAcc /> : <MenuLeft />}
+            {params1['pathname'].includes("account") ? <MenuAcc /> : <MenuLeft />}
+
+            {/* tạo thêm cái menu ứng với cpn  */}
 
             {props.children}
           </div>

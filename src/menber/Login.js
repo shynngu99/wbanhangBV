@@ -52,13 +52,14 @@ export default function Login(props) {
 
                         // const id = res.data.Auth.id
                         // console.log(id); 
-
                         const token = res.data.token
                         const Auth = res.data.Auth
                         const dataUser = JSON.stringify({
                             token,
                             Auth
                         });
+                        console.log(dataUser);
+
                         console.log('appState', dataUser);
                         localStorage.setItem('checkLogin', true)
                         localStorage.setItem('appState', dataUser)

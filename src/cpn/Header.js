@@ -50,7 +50,7 @@ export default function Header() {
                     <div class="row">
                         <div class="col-md-4 clearfix">
                             <div class="logo pull-left">
-                                <a href="index.html"><img src="images/home/logo.png" alt="" /></a>
+                                <a href="index.html"><img src="http://localhost/web2m/laravel8/laravel8/public/frontend/images/home/logo.png" alt="" /></a>
                             </div>
                             <div class="btn-group pull-right clearfix">
                                 <div class="btn-group">
@@ -82,7 +82,7 @@ export default function Header() {
                                     <li><a href="/account/update"><i class="fa fa-user"></i> Account</a></li>
                                     <li><a href=""><i class="fa fa-star"></i> Wishlist</a></li>
                                     <li><a href="checkout.html"><i class="fa fa-crosshairs"></i> Checkout</a></li>
-                                    <li><a href="cart.html"><i class="fa fa-shopping-cart"></i> Cart</a></li>
+                                    <li><a href="/account/product/cart"><i class="fa fa-shopping-cart"></i> Cart</a></li>
                                     {renderLogin()}
                                 </ul>
                             </div>
@@ -108,10 +108,10 @@ export default function Header() {
                                     <li><a href="/" class="active">Home</a></li>
                                     <li class="dropdown"><a href="/shop">Shop<i class="fa fa-angle-down"></i></a>
                                         <ul role="menu" class="sub-menu">
-                                            <li><a href="/myproduct">Products</a></li>
-                                            <li><a href="/myproduct/details">Product Details</a></li>
+                                            <li><a href="/account/myproduct">Products</a></li>
+                                            <li><a href="/account/myproduct/details">Product Details</a></li>
                                             <li><a href="checkout.html">Checkout</a></li>
-                                            <li><a href="cart.html">Cart</a></li>
+                                            <li><a href="/account/product/cart">Cart</a></li>
                                             <li><a href="login.html">Login</a></li>
                                         </ul>
                                     </li>

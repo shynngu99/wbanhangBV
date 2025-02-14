@@ -1,17 +1,10 @@
 export default function Shop() {
     return (
         <>
-            <section id="advertisement">
-                <div class="container">
-                    <img src="images/shop/advertisement.jpg" alt="" />
-                </div>
-            </section>
-
-
             <section>
                 <div class="container">
                     <div class="row">
-                        <div class="col-sm-3">
+                        {/* <div class="col-sm-3">
                             <div class="left-sidebar">
                                 <h2>Category</h2>
                                 <div class="panel-group category-products" id="accordian">
@@ -149,7 +142,7 @@ export default function Shop() {
                                 </div>
 
                             </div>
-                        </div>
+                        </div> */}
 
                         <div class="col-sm-9 padding-right">
                             <div class="features_items">
@@ -473,6 +466,11 @@ export default function Shop() {
                             </div>
                         </div>
                     </div>
+                </div>
+            </section>
+            <section id="advertisement">
+                <div class="container">
+                    <img src="images/shop/advertisement.jpg" alt="" />
                 </div>
             </section>
         </>

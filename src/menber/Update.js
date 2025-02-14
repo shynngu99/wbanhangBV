@@ -82,13 +82,13 @@ export default function Account(props) {
         };
         const newUserData = {
 
-            
+
             ...userData,
-             // Sao chép tất cả các thuộc tính hiện có của object userData
-             //  để giữ lại tất cả dữ liệu cũ không liên quan đến Auth
+            // Sao chép tất cả các thuộc tính hiện có của object userData
+            //  để giữ lại tất cả dữ liệu cũ không liên quan đến Auth
 
 
-             //tạo auth để lưu biến đổi 
+            //tạo auth để lưu biến đổi 
             Auth: {
                 id: user.id,
                 name: user.name,
@@ -125,26 +125,26 @@ export default function Account(props) {
     }
 
     return (
-        
-                   
-                    <div class="col-sm-9">
-                        <div class="blog-post-area">
-                            <h2 class="title text-center">Update user</h2>
-                            <div class="signup-form">
-                                <h2>New User Signup!</h2>
-                                <form action="#" enctype="multipart/form-data" onSubmit={handleSubmit} >
-                                    <input type="text" name="name" placeholder="Name" value={user.name} onChange={handleInput} />
-                                    <input type="email" name="email" placeholder="Email Address" value={user.email} readOnly onChange={handleInput} />
-                                    <input type="password" name="password" placeholder="Password" value={user.password} onChange={handleInput} />
-                                    <input type="number" name="phone" placeholder="Phone" onChange={handleInput} value={user.phone} />
-                                    <input type="text" name="address" placeholder="Address" onChange={handleInput} value={user.address} />
-                                    <input type="text" name="level" placeholder="Level" onChange={handleInput} value={user.level} />
-                                    <input type="file" name="avatar" placeholder="chọn Avatar" onChange={handleUserInputFile} />
-                                    <button type="submit" class="btn btn-default">Sign up</button>
-                                </form>
-                            </div>
-                        </div>
+        <>
+
+            <div class="col-sm-9">
+                <div class="blog-post-area">
+                    <h2 class="title text-center">Update user</h2>
+                    <div class="signup-form">
+                        <h2>New User Signup!</h2>
+                        <form action="#" enctype="multipart/form-data" onSubmit={handleSubmit} >
+                            <input type="text" name="name" placeholder="Name" value={user.name} onChange={handleInput} />
+                            <input type="email" name="email" placeholder="Email Address" value={user.email} readOnly onChange={handleInput} />
+                            <input type="password" name="password" placeholder="Password" value={user.password} onChange={handleInput} />
+                            <input type="number" name="phone" placeholder="Phone" onChange={handleInput} value={user.phone} />
+                            <input type="text" name="address" placeholder="Address" onChange={handleInput} value={user.address} />
+                            <input type="text" name="level" placeholder="Level" onChange={handleInput} value={user.level} />
+                            <input type="file" name="avatar" placeholder="chọn Avatar" onChange={handleUserInputFile} />
+                            <button type="submit" class="btn btn-default">Sign up</button>
+                        </form>
                     </div>
-               
+                </div>
+            </div>
+        </>
     )
 }

@@ -105,7 +105,7 @@ export default function RegisterAccount(props) {
                         setErrors(res.data.errors)
                     } else {
                         console.log(res)
-                        alert("thành công")
+                        alert("Đăng ký thành công")
                     }
                 })
         }

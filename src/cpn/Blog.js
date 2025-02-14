@@ -11,7 +11,6 @@ export default function Blog() {
         axios.get("http://localhost/web2m/laravel8/laravel8/public/api/blog")
             .then(res => {
                 console.log(res);
-
                 // res.data.blog.data.key
                 setData(res.data.blog.data)
             })
@@ -56,7 +55,7 @@ export default function Blog() {
         <section>
             <div class="container">
                 <div class="row">
-                    <div class="col-sm-3">
+                    {/* <div class="col-sm-3">
                         <div class="left-sidebar">
                             <h2>Category</h2>
                             <div class="panel-group category-products" id="accordian">
@@ -193,7 +192,7 @@ export default function Blog() {
                                 <img src="images/home/shipping.jpg" alt="" />
                             </div>
                         </div>
-                    </div>
+                    </div> */}
                     <div class="col-sm-9">
                         <div class="blog-post-area">
                             <h2 class="title text-center">Latest From our Blog</h2>
@@ -201,7 +200,7 @@ export default function Blog() {
                             {renderBlog()}
 
                             <div class="pagination-area">
-                                <ul class="pagination">
+                                <ul class="pagination">s
                                     <li><a href="" class="active">1</a></li>
                                     <li><a href="">2</a></li>
                                     <li><a href="">3</a></li>

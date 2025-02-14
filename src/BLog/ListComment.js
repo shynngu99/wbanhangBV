@@ -28,7 +28,7 @@ export default function ListComment(props) {
                 return (
                     <li class="media" key={key.id}>
                         <a class="pull-left" href="#">
-                            <img width={100} height={100} src={"http://localhost/web2m/laravel8/laravel8/public/upload/user/avatar/" + value.image_user} />
+                            <img width={100}  src={"http://localhost/web2m/laravel8/laravel8/public/upload/user/avatar/" + value.image_user} />
                             {/* <p>{data.image}</p> */}
                         </a>
                         <div class="media-body">

@@ -8,7 +8,7 @@ import Rate from "../BLog/Rate";
 export default function BlogDT() {
 
     let params = useParams();
-    // console.log(params);
+    console.log(params);
 
 
     const [data, setData] = useState('')
@@ -28,7 +28,7 @@ export default function BlogDT() {
         <section>
             <div class="container">
                 <div class="row">
-                    <div class="col-sm-3">
+                    {/* <div class="col-sm-3">
                         <div class="left-sidebar">
                             <h2>Category</h2>
                             <div class="panel-group category-products" id="accordian">
@@ -165,7 +165,7 @@ export default function BlogDT() {
                                 <img src="images/home/shipping.jpg" alt="" />
                             </div>
                         </div>
-                    </div>
+                    </div> */}
                     <div class="col-sm-9">
                         <div class="blog-post-area">
                             <h2 class="title text-center">Latest From our Blog</h2>

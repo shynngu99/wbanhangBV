@@ -12,6 +12,8 @@ import Update from './menber/Update';
 import MyProduct from './BLog/product/MyProduct';
 import Shop from './BLog/product/Shop';
 import Details from './BLog/product/Detail';
+import Cart from './BLog/product/Cart';
+import AddProduct from './product/AddProduct';
 
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
@@ -26,9 +28,12 @@ root.render(
           <Route path='/blog/detail/:id' element={<BlogDT />} />
           <Route path='/index/account' element={<IndexAccount />} />
           <Route path='/account/update' element={<Update />} />
-          <Route path='/myproduct' element={<MyProduct />} />
-          <Route path='/myproduct/details' element={<Details />} />
+          <Route path='/account/myproduct' element={<MyProduct />} />
+          <Route path='/account/myproduct/details' element={<Details />} />
           <Route path='/shop' element={<Shop />} />
+          <Route path='/account/product/cart' element={<Cart />} />
+          <Route path='/account/AddProduct' element={<AddProduct />} />
+
 
         </Routes>
       </App>
