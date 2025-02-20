@@ -8,7 +8,6 @@ export default function Account(props) {
 
     const [errors, setErrors] = useState({})
     const [getFile, setFile] = useState("")
-
     const [getAvatar, setAvatar] = useState('')
     let formData = new FormData();
 

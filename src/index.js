@@ -9,10 +9,10 @@ import BlogDT from './cpn/BlogDT';
 import IndexAccount from './menber/IndexAccount';
 import Home from './cpn/Home';
 import Update from './menber/Update';
-import MyProduct from './BLog/product/MyProduct';
-import Shop from './BLog/product/Shop';
-import Details from './BLog/product/Detail';
-import Cart from './BLog/product/Cart';
+import MyProduct from './product/MyProduct';
+import Shop from './product/Shop';
+import Details from './product/Detail';
+import Cart from './product/Cart';
 import AddProduct from './product/AddProduct';
 
 

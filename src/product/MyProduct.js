@@ -2,14 +2,28 @@ import axios from "axios"
 import { useEffect, useState } from "react"
 import { Link, useParams } from "react-router-dom"
 
-export default function MyProduct() {
+export default function MyProduct(props) {
 
     const [data, setData] = useState([])
+    const idProduct = Number(props.id)
+
+
+    const userData = JSON.parse(localStorage.getItem(["appState"]))
+
+    const accessToken = userData.token
+    const config = {
+        headers: {
+            'Authorization': 'Bearer ' + accessToken,
+            'Content-Type': 'application/x-www-form-urlencoded',
+            'Accept': 'application/json'
+        }
+    }
+
 
     useEffect(() => {
-        axios.get("http://localhost/web2m/laravel8/laravel8/public/api/product")
+        axios.get("http://localhost/web2m/laravel8/laravel8/public/api/user/my-product", config)
             .then(res => {
-                console.log(res);
+                // console.log(res);
                 setData(res.data.data)
 
             })
@@ -19,8 +33,16 @@ export default function MyProduct() {
 
 
 
+    const handleDeleteProduct = () => {
+        axios.delete("http://localhost/web2m/laravel8/laravel8/public/api/user/product/delete/" + idProduct, config)
+            .then(res => {
+                console.log(res);
 
-
+                setData(res.data.data)
+            })
+            .catch(error => console.log(error)
+            )
+    }
 
     function renderProduct() {
         if (data.length > 0) {
