@@ -24,7 +24,6 @@ export default function ListComment(props) {
     function renderComment() {
         if (comment.length > 0) {
             return comment.map((value, key) => {
-
                 return (
                     <li class="media" key={key.id}>
                         <a class="pull-left" href="#">

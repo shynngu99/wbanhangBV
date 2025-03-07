@@ -1,4 +1,54 @@
+import axios from "axios"
+import { useEffect, useState } from "react"
+
 export default function Home() {
+    const [product, setProduct] = useState('')
+
+    useEffect(() => {
+        axios.get("http://localhost/web2m/laravel8/laravel8/public/api/product")
+            .then(res => {
+                setProduct(res.data.data)
+            })
+            .catch(error => console.log(error)
+            )
+    }, [])
+    const renderProduct = () => {
+        if (product && product.length > 0) {
+            return product.map((value, key) => {
+                const images = JSON.parse(value.image)
+                const firstImg = images[0]
+                console.log(firstImg);
+                return (
+                    <div class="col-sm-4">
+                        <div class="product-image-wrapper">
+                            <div class="single-products">
+                                <div class="productinfo text-center">
+                                    <img src={"http://localhost/web2m/laravel8/laravel8/public/upload/product/13/" + firstImg} alt="" />
+                                    <h2>${value.price}</h2>
+                                    <p>{value.name}</p>
+                                    <a href="#" class="btn btn-default add-to-cart"><i class="fa fa-shopping-cart"></i>Add to cart</a>
+                                </div>
+                                <div class="product-overlay">
+                                    <div class="overlay-content">
+                                        <h2>${value.price}</h2>
+                                        <p>{value.name}</p>
+                                        <a href="#" class="btn btn-default add-to-cart"><i class="fa fa-shopping-cart"></i>Add to cart</a>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="choose">
+                                <ul class="nav nav-pills nav-justified">
+                                    <li><a href="#"><i class="fa fa-plus-square"></i>Add to wishlist</a></li>
+                                    <li><a href="#"><i class="fa fa-plus-square"></i>Add to compare</a></li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                )
+            }
+            )
+        }
+    }
     return (
         <section>
             <div class="container">
@@ -6,7 +56,7 @@ export default function Home() {
                     <div class="col-sm-9 padding-right">
                         <div class="features_items">
                             <h2 class="title text-center">Features Items</h2>
-                            <div class="col-sm-4">
+                            {/* <div class="col-sm-4">
                                 <div class="product-image-wrapper">
                                     <div class="single-products">
                                         <div class="productinfo text-center">
@@ -157,10 +207,10 @@ export default function Home() {
                                         </ul>
                                     </div>
                                 </div>
-                            </div>
+                            </div> */}
+                            {renderProduct()}
 
                         </div>
-
                         <div class="category-tab">
                             <div class="col-sm-12">
                                 <ul class="nav nav-tabs">

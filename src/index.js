@@ -14,6 +14,7 @@ import Shop from './product/Shop';
 import Details from './product/Detail';
 import Cart from './product/Cart';
 import AddProduct from './product/AddProduct';
+import UpdateProduct from './product/UpdateProduct';
 
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
@@ -33,6 +34,7 @@ root.render(
           <Route path='/shop' element={<Shop />} />
           <Route path='/account/product/cart' element={<Cart />} />
           <Route path='/account/AddProduct' element={<AddProduct />} />
+          <Route path='/account/updateProduct/:id' element={<UpdateProduct />} />
 
 
         </Routes>

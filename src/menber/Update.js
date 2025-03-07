@@ -6,6 +6,10 @@ export default function Account(props) {
 
     const idBlog = Number(props.id)
 
+    // console.log(props.id);
+    
+
+
     const [errors, setErrors] = useState({})
     const [getFile, setFile] = useState("")
     const [getAvatar, setAvatar] = useState('')

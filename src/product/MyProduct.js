@@ -1,11 +1,11 @@
 import axios from "axios"
 import { useEffect, useState } from "react"
-import { Link, useParams } from "react-router-dom"
+import { Link } from "react-router-dom"
 
-export default function MyProduct(props) {
+export default function MyProduct() {
 
-    const [data, setData] = useState([])
-    const idProduct = Number(props.id)
+    const [data, setData] = useState("")
+    // console.log(data);
 
 
     const userData = JSON.parse(localStorage.getItem(["appState"]))
@@ -25,157 +25,74 @@ export default function MyProduct(props) {
             .then(res => {
                 // console.log(res);
                 setData(res.data.data)
-
             })
             .catch(error => console.log(error)
             )
     }, [])
 
+    function renderProduct() {
+        if (data && Object.keys(data).length > 0) {
+            return Object.values(data).map((value, key) => {
+                // console.log(value.image);
+                // console.log(data[8]);
+                console.log(value);
+                
 
+                const images = JSON.parse(value.image)
+                const firstImg = images[0]
+                console.log(firstImg);
 
-    const handleDeleteProduct = () => {
-        axios.delete("http://localhost/web2m/laravel8/laravel8/public/api/user/product/delete/" + idProduct, config)
+                return (
+                    <tr key={key}>
+                        <td className="cart_product">
+                            <a href="#"> <img width={100} alt="" src={"http://localhost/web2m/laravel8/laravel8/public/upload/product/13/" + firstImg} /></a>
+                        </td>
+                        <td className="cart_description">
+                            <h4><a href="">{value.name}</a></h4>
+                        </td>
+                        <td className="cart_price">
+                            <p>${value.price}</p>
+                        </td>
+                        <td class="cart_total">
+                            <Link to={`/account/updateProduct/${value.id}`} style={{ color: "blue", marginRight: "10px", border: "1px solid #ccc", borderRadius: "5px", backgroundColor: "#f0f0f0" }}>Edit</Link>
+                            <a href="#" style={{ color: "red", marginRight: "10px", border: "1px solid #ccc", borderRadius: "5px", backgroundColor: "#f0f0f0" }} id={value.id} onClick={handleDeleteProduct}>Delete</a>
+                        </td>
+                    </tr>
+                )
+            })
+        }
+    }
+
+    const handleDeleteProduct = (e) => {
+        const valueInputId = e.target.id
+        axios.get(`http://localhost/web2m/laravel8/laravel8/public/api/user/product/delete/${valueInputId}`, config)
             .then(res => {
                 console.log(res);
-
                 setData(res.data.data)
             })
             .catch(error => console.log(error)
             )
     }
-
-    function renderProduct() {
-        if (data.length > 0) {
-            return data.map((value, key) => {
-                return (
-                    <tr>
-                        <td class="cart_description">
-                            <h4><a href="">{value.name}</a></h4>
-
-                        </td>
-                        <td class="cart_product">
-                            <a href=""><img src={"http://localhost/web2m/laravel8/laravel8/public/upload/product/3/" + value['image']} /></a>
-
-                            {/* <p>
-                                {value.image}
-                            </p> */}
-                        </td>
-                        <td class="cart_price">
-                            <p>${value.price}</p>
-                        </td>
-
-                        <td class="cart_total">
-                            <a style={{ border: "1px solid #ccc", padding: "5px", margin: "2px", borderRadius: "3px", cursor: "pointer" }}> Edit</a>
-                            <a style={{ border: "1px solid #ccc", padding: "5px", margin: "2px", borderRadius: "3px", cursor: "pointer" }}>Delete</a>
-                        </td>
-                    </tr >
-
-                )
-            })
-        }
-
-    }
     return (
         <section>
             <div class="container">
                 <div class="row">
-                    {/* <div class="col-sm-3">
-                        <div class="left-sidebar">
-                            <h2>Account</h2>
-                            <div class="panel-group category-products" id="accordian">
-
-                                <div class="panel panel-default">
-                                    <div class="panel-heading">
-                                        <h4 class="panel-title"><a href="#">account</a></h4>
-                                    </div>
-                                </div>
-                                <div class="panel panel-default">
-                                    <div class="panel-heading">
-                                        <h4 class="panel-title"><a href="#">My product</a></h4>
-                                    </div>
-                                </div>
-
-                            </div>
-
-                        </div>
-                    </div> */}
                     <div class="col-sm-9">
                         <div class="table-responsive cart_info">
-
-                            <table class="table table-condensed">
+                            <table class="table table-condensed table-bordered table-striped" >
                                 <thead>
                                     <tr class="cart_menu">
-                                        <td class="description">Name</td>
-                                        <td class="image" style={{ textAlign: 'center' }}>Img</td>
-                                        <td class="price">Price</td>
-                                        <td class="total">Acction</td>
-
+                                        <td class="image">image</td>
+                                        <td class="description">name</td>
+                                        <td class="price">price</td>
+                                        <td class="total">action</td>
                                     </tr>
                                 </thead>
-
-
                                 <tbody>
-
                                     {renderProduct()}
-
-                                    {/* <tr>
-                                        <td class="cart_product">
-                                            <a href=""><img src="images/cart/one.png" alt="" /></a>
-                                        </td>
-                                        <td class="cart_description">
-                                            <h4><a href="">Colorblock Scuba</a></h4>
-
-                                        </td>
-                                        <td class="cart_price">
-                                            <p>$59</p>
-                                        </td>
-
-                                        <td class="cart_total">
-                                            <a>edit</a>
-                                            <a>delete</a>
-                                        </td>
-
-                                    </tr>
-                                    <tr>
-                                        <td class="cart_product">
-                                            <a href=""><img src="images/cart/one.png" alt="" /></a>
-                                        </td>
-                                        <td class="cart_description">
-                                            <h4><a href="">Colorblock Scuba</a></h4>
-
-                                        </td>
-                                        <td class="cart_price">
-                                            <p>$59</p>
-                                        </td>
-
-                                        <td class="cart_total">
-                                            <a>edit</a>
-                                            <a>delete</a>
-                                        </td>
-
-                                    </tr>
-                                    <tr>
-                                        <td class="cart_product">
-                                            <a href=""><img src="images/cart/one.png" alt="" /></a>
-                                        </td>
-                                        <td class="cart_description">
-                                            <h4><a href="">Colorblock Scuba</a></h4>
-
-                                        </td>
-                                        <td class="cart_price">
-                                            <p>$59</p>
-                                        </td>
-
-                                        <td class="cart_total">
-                                            <a>edit</a>
-
-                                            <a>delete</a>
-                                        </td>
-                                    </tr> */}
                                 </tbody>
-                                <Link to={`/account/Addproduct`} style={{ background: "#FE980F", color: "black", border: "1px solid #ccc", padding: "5px", margin: "2px", borderRadius: "3px", cursor: "pointer" }}> Add New</Link>
-
                             </table>
+                            <div style={{ textAlign: "center", backgroundColor: "#FE980F", width: "100px" }}>  <Link to={"/account/AddProduct"}>ADD NEW</Link> </div>
                         </div>
                     </div>
                 </div>

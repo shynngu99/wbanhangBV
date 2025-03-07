@@ -1,13 +1,10 @@
 import { useEffect, useState } from "react"
 import FormError from "../menber/FormError"
 import axios from "axios"
-import { useParams } from "react-router-dom"
 import { useNavigate } from "react-router-dom"
 
 export default function AddProduct() {
-    let pramas = useParams();
     const navigate = useNavigate()
-    const [product, setProduct] = useState('')
     const [inputs, setInput] = useState({
         name: "",
         price: "",
@@ -16,8 +13,8 @@ export default function AddProduct() {
         category: "",
         company: "",
         detail: "",
-        sale: "",
-        status: "0",
+        sale: '1',
+        status: '0'
 
     })
     let errorSubmit = {}
@@ -28,81 +25,78 @@ export default function AddProduct() {
 
 
     const [file, SetFile] = useState("")
-    const [errors, setErrors] = useState({}) // qua api
+    const [errors, setErrors] = useState({})
+    const [avatar, setAvatar] = useState("") // qua api
 
-    const [avatar, setAvatar] = useState("")
 
 
     const handleInput = (e) => {
         const nameInput = e.target.name
         const valueInput = e.target.value
         setInput(state => ({
-            ...state, // toán tử spread, sao chép tất cả các thuộc tính  từ trạng thái hiện của state vào obj mới 
-            [nameInput]: valueInput  //  nếu nameInput là "email" và valueInput là "[đã xoá địa chỉ email]", thì dòng này sẽ cập nhật state.email thành "[đã xoá địa chỉ email]".
+            ...state,
+            [nameInput]: valueInput
         }))
     }
 
     const handleInputFile = (e) => {
-        // xử lý tại js
-        const files = e.target.files
+        const files = e.target.files;
         const validImageExtensions = ['png', 'jpg', 'jpeg', 'PNG', 'JPG'];
 
-        if (files.length === 0 || !files) {
-            errorSubmit.avatar = 'Hãy chọn ít nhất 1 ảnh mô tả sản phẩm'
-            flag = false
-        } else if (files.length > 3) {
-            errorSubmit.avatar = 'cho phép upload tối đa 3 ảnh '
-            flag = false
-        } else {
-            for (let i = 0; i < files.length; i++) {
-                const file = files[i];
+        // Reset lỗi
 
-                if (file.size > 1024 * 1024) {
-                    errorSubmit.avatar = "Hình ảnh vượt quá 1MB";
-                    flag = false;
-                    break;
-                }
+        // Kiểm tra số lượng ảnh
+        if (!files || files.length === 0) {
+            errorSubmit.avatar = 'Vui lòng chọn ít nhất 1 ảnh';
+            flag = false;
+            setErrors(errorSubmit);
+            return;
+        }
 
-                const fileExtension = file.name.split('.').pop();
-                if (!validImageExtensions.includes(fileExtension)) {
-                    errorSubmit.avatar = "Hình ảnh có đuôi chưa hợp lệ";
-                    flag = false;
-                    break;
-                }
+        if (files.length > 3) {
+            errorSubmit.avatar = 'Chỉ được chọn tối đa 3 ảnh';
+            flag = false;
+            setErrors(errorSubmit);
+            return;
+        }
+
+        // Kiểm tra từng file
+        for (let i = 0; i < files.length; i++) {
+            const file = files[i];
+
+            // Kiểm tra kích thước
+            if (file.size > 1024 * 1024) {
+                errorSubmit.avatar = `File ${file.name} vượt quá 1MB`;
+                flag = false;
+                break;
+            }
+
+            // Kiểm tra định dạng
+            const fileExtension = file.name.split('.').pop();
+            if (!validImageExtensions.includes(fileExtension)) {
+                errorSubmit.avatar = `File ${file.name} không đúng định dạng (chỉ chấp nhận: png, jpg, jpeg)`;
+                flag = false;
+                break;
             }
         }
         if (!flag) {
-            setErrors(errorSubmit)
-        } else {
-            SetFile(files)
+            setErrors(errorSubmit);
+            return;
         }
 
+        // Nếu tất cả điều kiện đều hợp lệ
+        SetFile(files);
 
-        // send file to api sever
-
-        let reader = new FileReader();
-        reader.onload = (e) => {
-            setAvatar(e.target.result)
-        }
-        reader.readAsDataURL(files[0])
-
-    }
-    const userData = JSON.parse(localStorage.getItem(["appState"]));
-
-    let url = "http://localhost/web2m/laravel8/laravel8/public/api/user/product/add/"
-    let accessToken = userData.token
-    let config = {
-        headers: {
-            'Authorization': 'Bearer ' + accessToken,
-            'Content-Type': 'application/x-www-form-urlencoded',
-            'Accept': 'application/json'
-        }
+        // Tạo FormData để gửi lên API
+        // const formData = new FormData();
+        // for (let i = 0; i < files.length; i++) {
+        //     formData.append('file[]', files[i]);
+        // }
+        // setAvatar(formData);
     }
 
     function handleSubmit(e) {
         e.preventDefault();
-
-
 
         if (inputs.name == "") {
             errorSubmit.name = "Vui lòng nhập tên sản phẩm"
@@ -134,37 +128,28 @@ export default function AddProduct() {
         }
         if (inputs.sale == "") {
             errorSubmit.sale = "Vui lòng nhập sale"
-            flag = false
         }
-        const validImageExtensions = ['png', 'jpg', 'jpeg', 'PNG', 'JPG'];
         if (file == "") {
             errorSubmit.avatar = "Vui lòng chọn ít nhất 1 ảnh"
             flag = false
-        } else {
-            let getSize = file[0]['size']
-            // console.log(getSize);
-            if (file.length > 0) {
-                if (getSize > (1024 * 1024)) {
-                    errorSubmit.avatar = "Hình ảnh vượt quá 1MB";
-                    flag = false;
-                } else {
-                    const fileName = file[0].name;
-                    const fileExtension = fileName.split('.').pop();
+        }
 
-                    if (!validImageExtensions.includes(fileExtension)) {
-                        errorSubmit.avatar = "Hình ảnh có đuôi chưa hợp lệ"
-                        flag = false;
-                    } else {
-                        console.log("OK");
-                    }
-                }
+
+        const userData = JSON.parse(localStorage.getItem(["appState"]));
+
+        let url = "http://localhost/web2m/laravel8/laravel8/public/api/user/product/add"
+        let accessToken = userData.token
+        let config = {
+            headers: {
+                'Authorization': 'Bearer ' + accessToken,
+                'Content-Type': 'application/x-www-form-urlencoded',
+                'Accept': 'application/json'
             }
         }
 
         if (!flag) {
             setErrors(errorSubmit)
         } else {
-
             let formData = new FormData();
             formData.append('name', inputs.name);
             formData.append('price', inputs.price);
@@ -176,15 +161,18 @@ export default function AddProduct() {
             formData.append('sale', inputs.sale);
 
 
-            Object.keys(avatar).map((item, i) => {
-                formData.append("file[]", avatar[item])
-            })
+            for (let i = 0; i < file.length; i++) {
+                formData.append('file[]', file[i]);
+            }
+            // console.log(file);
 
 
-            axios.post(url, config, formData)
+            axios.post(url, formData, config)
                 .then(res => {
-                    setProduct(res)
-                    navigate('/account/myproduct')
+                    console.log(res);
+                    alert("Thêm sản phẩm thành công")
+                    navigate("/account/myproduct")
+
                 })
                 .catch(error => console.log(error)
                 )
@@ -194,7 +182,7 @@ export default function AddProduct() {
     useEffect(() => {
         axios.get("http://localhost/web2m/laravel8/laravel8/public/api/category-brand")
             .then(res => {
-                console.log(res);
+                // console.log(res);
                 setCategorys(res.data.category)
             })
             .catch(error => {
@@ -204,7 +192,7 @@ export default function AddProduct() {
     useEffect(() => {
         axios.get("http://localhost/web2m/laravel8/laravel8/public/api/category-brand")
             .then(res => {
-                console.log(res);
+                // console.log(res);
                 setBrands(res.data.brand)
             })
             .catch(error => {
@@ -217,7 +205,7 @@ export default function AddProduct() {
             return categorys.map((value, key) => {
                 return (
                     // value={value.id}
-                    <option key={key} value={value.id}>{value.category}</option>
+                    <option key={key} value={value.id} >{value.category}</option>
                 )
             })
         }
@@ -230,6 +218,24 @@ export default function AddProduct() {
                     <option key={key} value={value.id}>{value.brand}</option>
                 )
             })
+        }
+    }
+
+    function renderSale() {
+        if (inputs.status === "1") {
+            return (
+                <div style={{ display: "flex " }}>
+                    <input style={{ width: '20%' }} type="number" name="sale" placeholder="0" className="form-control" value={0} disabled onChange={handleInput} />
+                    <span style={{ marginTop: "10px" }}>%</span>
+                </div>
+            )
+        } else if (inputs.status === "0") {
+            return (
+                <div style={{ display: "flex " }}>
+                    <input style={{ width: '20%' }} type="number" name="sale" placeholder="0" className="form-control" value={inputs.sale} onChange={handleInput} />
+                    <span style={{ marginTop: "10px" }}>%</span>
+                </div>
+            )
         }
     }
     return (
@@ -252,15 +258,11 @@ export default function AddProduct() {
                                         <option value="">Please choose brand</option>
                                         {handleInputB()}
                                     </select>
-                                    <select name="sale" className="form-control" onChange={handleInput}>
-                                        <option value="">New or Sale</option>
+                                    <select name="status" value={inputs.status} className="form-control" onChange={handleInput}>
                                         <option value="1">New</option>
                                         <option value="0">Sale</option>
                                     </select>
-                                    <div style={{ display: "flex " }}>
-                                        <input style={{ width: '20%' }} type="number" name="handleSale" placeholder="0" className="form-control" onChange={handleInput} disabled={inputs.sale === "1"} />
-                                        <span style={{ marginTop: "10px" }}>%</span>
-                                    </div>
+                                    {renderSale()}
                                     {/* chưa xử lý được khi chọn new thì % reset về 0 */}
                                     <input type="text" name="company" placeholder="Company profile" className="form-control" onChange={handleInput} />
                                     <input type="file" multiple name="image" className="form-control" onChange={handleInputFile} accept=".jpg,.jpeg,.png" max="3" />
