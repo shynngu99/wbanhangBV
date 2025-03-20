@@ -1,4 +1,74 @@
+import axios from "axios"
+import { useEffect, useState } from "react"
+
 export default function Cart() {
+
+    const [product, setProduct] = useState('')
+
+    const dataLocal = localStorage.getItem("SoLuong")
+    const data = JSON.parse(dataLocal)
+    // console.log(data);
+
+    useEffect(() => {
+        axios.post("http://localhost/web2m/laravel8/laravel8/public/api/product/cart", data)
+            .then(res => {
+                // console.log(res.data.data);
+                setProduct(res.data.data)
+            })
+            .catch(error => console.log(error)
+            )
+    }, [])
+
+    // console.log(product);
+
+    const hanldeReduce = (e) => {
+
+        let product = {}
+        const slBD = e.target.value
+        const id = e.target.id
+
+        if (product[id]) {
+            slBD += 1
+        }
+    }
+
+    const renderProduct = () => {
+        if (product && product.length > 0) {
+            return product.map((value, key) => {
+                // console.log(value);
+                const images = JSON.parse(value.image)
+                const firstImg = images[0]
+                const total = value.qty * value.price
+                return (
+                    <tr>
+                        <td class="cart_product">
+                            <a href=""><img width={100} src={"http://localhost/web2m/laravel8/laravel8/public/upload/product/13/" + firstImg} alt="" /></a>
+                        </td>
+                        <td class="cart_description">
+                            <h4><a href="">{value.name}</a></h4>
+                            <p>Web ID: {value.id}</p>
+                        </td>
+                        <td class="cart_price">
+                            <p>${value.price}</p>
+                        </td>
+                        <td class="cart_quantity">
+                            <div class="cart_quantity_button">
+                                <a class="cart_quantity_up" href="" onClick={(e) => hanldeReduce(e)}> + </a>
+                                <input class="cart_quantity_input" type="text" name="quantity" value={value.qty} autocomplete="off" size="2" />
+                                <a class="cart_quantity_down" href=""> - </a>
+                            </div>
+                        </td>
+                        <td class="cart_total">
+                            <p class="cart_total_price">${total}</p>
+                        </td>
+                        <td class="cart_delete">
+                            <a class="cart_quantity_delete" href=""><i class="fa fa-times"></i></a>
+                        </td>
+                    </tr>
+                )
+            })
+        }
+    }
     return (
         <>
             <section id="cart_items">
@@ -22,7 +92,8 @@ export default function Cart() {
                                 </tr>
                             </thead>
                             <tbody>
-                                <tr>
+                                {renderProduct()}
+                                {/* <tr>
                                     <td class="cart_product">
                                         <a href=""><img src="images/cart/one.png" alt="" /></a>
                                     </td>
@@ -97,11 +168,12 @@ export default function Cart() {
                                     <td class="cart_delete">
                                         <a class="cart_quantity_delete" href=""><i class="fa fa-times"></i></a>
                                     </td>
-                                </tr>
+                                </tr> */}
                             </tbody>
                         </table>
                     </div>
                 </div>
+
             </section>
 
             <section id="do_action">

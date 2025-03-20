@@ -30,7 +30,7 @@ root.render(
           <Route path='/index/account' element={<IndexAccount />} />
           <Route path='/account/update' element={<Update />} />
           <Route path='/account/myproduct' element={<MyProduct />} />
-          <Route path='/account/myproduct/details' element={<Details />} />
+          <Route path='/account/myproduct/details/:id' element={<Details />} />
           <Route path='/shop' element={<Shop />} />
           <Route path='/account/product/cart' element={<Cart />} />
           <Route path='/account/AddProduct' element={<AddProduct />} />

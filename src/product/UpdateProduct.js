@@ -16,7 +16,7 @@ export default function UpdateProduct(props) {
         company: "",
         detail: "",
         status: "",
-        sale: ""
+        sale: "", 
     })
     const navigate = useNavigate();
     // console.log(product.id_brand);
@@ -57,7 +57,8 @@ export default function UpdateProduct(props) {
             )
     }, [])
 
-
+    // console.log(product);
+    
     const handleInput = (e) => {
         const nameInput = e.target.name
         const valueInput = e.target.value
@@ -261,11 +262,12 @@ export default function UpdateProduct(props) {
         formData.append('status', product.status);
 
 
+
         for (let i = 0; i < avatarCheckBox.length; i++) {
             formData.append('avatarCheckBox[]', avatarCheckBox[i]);
         }
 
-        console.log(getFile);
+        // console.log(getFile);    
 
         for (let j = 0; j < getFile.length; j++) {
             formData.append('file[]', getFile[j]);
@@ -288,7 +290,7 @@ export default function UpdateProduct(props) {
         if (product.status === "1") {
             return (
                 <div style={{ display: "flex " }}>
-                    <input style={{ width: '20%' }} type="number" name="sale" placeholder="0" className="form-control" value={0} disabled onChange={handleInput} />
+                    <input style={{ width: '20%' }} type="number" name="sale" placeholder="0" className="form-control" value={0}  onChange={handleInput} />
                     <span style={{ marginTop: "10px" }}>%</span>
                 </div>
             )

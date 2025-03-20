@@ -13,8 +13,8 @@ export default function AddProduct() {
         category: "",
         company: "",
         detail: "",
-        sale: '1',
-        status: '0'
+        sale: '',
+        status: '1'
 
     })
     let errorSubmit = {}
@@ -171,7 +171,9 @@ export default function AddProduct() {
                 .then(res => {
                     console.log(res);
                     alert("Thêm sản phẩm thành công")
-                    navigate("/account/myproduct")
+                    // setTimeout(() => {
+                    //     navigate("/account/myproduct")
+                    // }, 200);
 
                 })
                 .catch(error => console.log(error)
@@ -225,7 +227,7 @@ export default function AddProduct() {
         if (inputs.status === "1") {
             return (
                 <div style={{ display: "flex " }}>
-                    <input style={{ width: '20%' }} type="number" name="sale" placeholder="0" className="form-control" value={0} disabled onChange={handleInput} />
+                    <input style={{ width: '20%' }} type="number" name="sale" placeholder="0" className="form-control" value={0}  onChange={handleInput} />
                     <span style={{ marginTop: "10px" }}>%</span>
                 </div>
             )

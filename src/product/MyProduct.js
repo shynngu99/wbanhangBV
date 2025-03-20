@@ -29,18 +29,21 @@ export default function MyProduct() {
             .catch(error => console.log(error)
             )
     }, [])
+    console.log(data);
 
     function renderProduct() {
         if (data && Object.keys(data).length > 0) {
             return Object.values(data).map((value, key) => {
                 // console.log(value.image);
                 // console.log(data[8]);
-                console.log(value);
-                
+                // console.log(typeof value);
+
 
                 const images = JSON.parse(value.image)
+                // console.log(images);
+
                 const firstImg = images[0]
-                console.log(firstImg);
+                // console.log(typeof firstImg);
 
                 return (
                     <tr key={key}>
@@ -64,10 +67,10 @@ export default function MyProduct() {
     }
 
     const handleDeleteProduct = (e) => {
-        const valueInputId = e.target.id
+        const valueInputId = e.target.id // lấy id từ id class
         axios.get(`http://localhost/web2m/laravel8/laravel8/public/api/user/product/delete/${valueInputId}`, config)
             .then(res => {
-                console.log(res);
+                // console.log(res);
                 setData(res.data.data)
             })
             .catch(error => console.log(error)
