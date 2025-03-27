@@ -1,6 +1,14 @@
+import { useContext } from "react"
 import { Link, useNavigate } from "react-router-dom"
+import { UserContext } from "../ContextApp/UserContext"
+import { useSelector } from "react-redux"
+
 export default function Header() {
     const navigate = useNavigate()
+    const xxx = useContext(UserContext)
+    const qtyRedux = useSelector(state => state.hobby)
+    console.log(qtyRedux)
+
     function renderLogin() {
         let checkLogin = localStorage.getItem('checkLogin')
         if (checkLogin) {
@@ -12,6 +20,15 @@ export default function Header() {
                 <li><Link to="/index/account" id="cart"><i class="fa fa-shopping-cart"></i>Login</Link></li >
             )
         }
+    }
+    const QtyCart = () => {
+        // console.log(Cart);
+
+        return (
+            <li><a href="/account/product/cart"><i class="fa fa-shopping-cart"></i> Cart</a>
+                <span>{qtyRedux}</span>
+            </li>
+        )
     }
     function logout() {
         localStorage.clear()
@@ -82,7 +99,7 @@ export default function Header() {
                                     <li><a href="/account/update"><i class="fa fa-user"></i> Account</a></li>
                                     <li><a href=""><i class="fa fa-star"></i> Wishlist</a></li>
                                     <li><a href="checkout.html"><i class="fa fa-crosshairs"></i> Checkout</a></li>
-                                    <li><a href="/account/product/cart"><i class="fa fa-shopping-cart"></i> Cart</a></li>
+                                    {QtyCart()}
                                     {renderLogin()}
                                 </ul>
                             </div>

@@ -9,6 +9,7 @@ export default function Cart() {
     const data = JSON.parse(dataLocal)
     // console.log(data);
 
+
     useEffect(() => {
         axios.post("http://localhost/web2m/laravel8/laravel8/public/api/product/cart", data)
             .then(res => {
@@ -21,15 +22,75 @@ export default function Cart() {
 
     // console.log(product);
 
-    const hanldeReduce = (e) => {
 
-        let product = {}
-        const slBD = e.target.value
+    const hanldeIncrease = (e) => {
         const id = e.target.id
 
-        if (product[id]) {
-            slBD += 1
+        let newProduct = [...product] /// tạo 1 bộ nhớ giống product
+        newProduct.map((value, key) => {
+            const idPro = value.id
+            if (idPro == id) {
+                newProduct[key]['qty'] += 1;
+
+            }
+        })
+        setProduct(newProduct)
+        if (data[id]) {
+            data[id] += 1
         }
+        localStorage.setItem("SoLuong", JSON.stringify(data))
+    }
+    // console.log(product);
+
+    const hanldeReduce = (e) => {
+        const id = e.target.id
+        let newProduct = [...product] /// tạo 1 bộ nhớ giống product
+        newProduct.map((value, key) => {
+            const idPro = value.id
+            if (idPro == id) {
+
+                newProduct[key]['qty'] -= 1;
+
+            } else {
+                if (data[id] <= 0)
+                    delete data[id
+                    ]
+            }
+
+        })
+        setProduct(newProduct)
+
+        if (data[id]) {
+            data[id] -= 1
+        } else {
+            if (data[id] <= 0)
+                delete data[id]
+        }
+        localStorage.setItem("SoLuong", JSON.stringify(data))
+    }
+
+    const removeProduct = (e) => {
+        const id = e.target.id
+        let newProduct = product.filter((value) => value.id != id)
+
+        console.log(newProduct);
+
+        setProduct(newProduct)
+
+        if (data[id]) {
+            delete data[id]
+        }
+        localStorage.setItem("SoLuong", JSON.stringify(data))
+
+    }
+    function totalALL() {
+        let total = 0
+        if (product && product.length > 0) {
+            for (let i = 0; i < product.length; i++) {
+                total += product[i].price * product[i].qty
+            }
+        }
+        return total
     }
 
     const renderProduct = () => {
@@ -53,16 +114,16 @@ export default function Cart() {
                         </td>
                         <td class="cart_quantity">
                             <div class="cart_quantity_button">
-                                <a class="cart_quantity_up" href="" onClick={(e) => hanldeReduce(e)}> + </a>
+                                <a id={value.id} class="cart_quantity_up" onClick={(e) => hanldeIncrease(e)}> + </a>
                                 <input class="cart_quantity_input" type="text" name="quantity" value={value.qty} autocomplete="off" size="2" />
-                                <a class="cart_quantity_down" href=""> - </a>
+                                <a id={value.id} class="cart_quantity_down" onClick={(e) => hanldeReduce(e)} > - </a>
                             </div>
                         </td>
                         <td class="cart_total">
                             <p class="cart_total_price">${total}</p>
                         </td>
                         <td class="cart_delete">
-                            <a class="cart_quantity_delete" href=""><i class="fa fa-times"></i></a>
+                            <a id={value.id} class="cart_quantity_delete" onClick={(e) => removeProduct(e)}><i class="fa fa-times"></i></a>
                         </td>
                     </tr>
                 )
@@ -93,82 +154,6 @@ export default function Cart() {
                             </thead>
                             <tbody>
                                 {renderProduct()}
-                                {/* <tr>
-                                    <td class="cart_product">
-                                        <a href=""><img src="images/cart/one.png" alt="" /></a>
-                                    </td>
-                                    <td class="cart_description">
-                                        <h4><a href="">Colorblock Scuba</a></h4>
-                                        <p>Web ID: 1089772</p>
-                                    </td>
-                                    <td class="cart_price">
-                                        <p>$59</p>
-                                    </td>
-                                    <td class="cart_quantity">
-                                        <div class="cart_quantity_button">
-                                            <a class="cart_quantity_up" href=""> + </a>
-                                            <input class="cart_quantity_input" type="text" name="quantity" value="1" autocomplete="off" size="2" />
-                                            <a class="cart_quantity_down" href=""> - </a>
-                                        </div>
-                                    </td>
-                                    <td class="cart_total">
-                                        <p class="cart_total_price">$59</p>
-                                    </td>
-                                    <td class="cart_delete">
-                                        <a class="cart_quantity_delete" href=""><i class="fa fa-times"></i></a>
-                                    </td>
-                                </tr>
-
-                                <tr>
-                                    <td class="cart_product">
-                                        <a href=""><img src="images/cart/two.png" alt="" /></a>
-                                    </td>
-                                    <td class="cart_description">
-                                        <h4><a href="">Colorblock Scuba</a></h4>
-                                        <p>Web ID: 1089772</p>
-                                    </td>
-                                    <td class="cart_price">
-                                        <p>$59</p>
-                                    </td>
-                                    <td class="cart_quantity">
-                                        <div class="cart_quantity_button">
-                                            <a class="cart_quantity_up" href=""> + </a>
-                                            <input class="cart_quantity_input" type="text" name="quantity" value="1" autocomplete="off" size="2" />
-                                            <a class="cart_quantity_down" href=""> - </a>
-                                        </div>
-                                    </td>
-                                    <td class="cart_total">
-                                        <p class="cart_total_price">$59</p>
-                                    </td>
-                                    <td class="cart_delete">
-                                        <a class="cart_quantity_delete" href=""><i class="fa fa-times"></i></a>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td class="cart_product">
-                                        <a href=""><img src="images/cart/three.png" alt="" /></a>
-                                    </td>
-                                    <td class="cart_description">
-                                        <h4><a href="">Colorblock Scuba</a></h4>
-                                        <p>Web ID: 1089772</p>
-                                    </td>
-                                    <td class="cart_price">
-                                        <p>$59</p>
-                                    </td>
-                                    <td class="cart_quantity">
-                                        <div class="cart_quantity_button">
-                                            <a class="cart_quantity_up" href=""> + </a>
-                                            <input class="cart_quantity_input" type="text" name="quantity" value="1" autocomplete="off" size="2" />
-                                            <a class="cart_quantity_down" href=""> - </a>
-                                        </div>
-                                    </td>
-                                    <td class="cart_total">
-                                        <p class="cart_total_price">$59</p>
-                                    </td>
-                                    <td class="cart_delete">
-                                        <a class="cart_quantity_delete" href=""><i class="fa fa-times"></i></a>
-                                    </td>
-                                </tr> */}
                             </tbody>
                         </table>
                     </div>
@@ -243,7 +228,7 @@ export default function Cart() {
                                     <li>Cart Sub Total <span>$59</span></li>
                                     <li>Eco Tax <span>$2</span></li>
                                     <li>Shipping Cost <span>Free</span></li>
-                                    <li>Total <span>$61</span></li>
+                                    <li>Total <span>${totalALL()}</span></li>
                                 </ul>
                                 <a class="btn btn-default update" href="">Update</a>
                                 <a class="btn btn-default check_out" href="">Check Out</a>

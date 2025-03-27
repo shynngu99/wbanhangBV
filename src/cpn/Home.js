@@ -1,10 +1,11 @@
 import axios from "axios"
-import { useEffect, useState } from "react"
+import { useContext, useEffect, useState } from "react"
 import { data, Link } from "react-router-dom"
+import { UserContext } from "../ContextApp/UserContext"
 
 export default function Home() {
     const [product, setProduct] = useState('')
-
+    let xxx = useContext(UserContext)
     useEffect(() => {
         axios.get("http://localhost/web2m/laravel8/laravel8/public/api/product")
             .then(res => {
@@ -33,14 +34,31 @@ export default function Home() {
 
         // Lưu đối tượng sản phẩm đã cập nhật trở lại local storage
         localStorage.setItem("SoLuong", JSON.stringify(product))
+
+        //viết 1 func tính tổng qty
+
+        // const SoLuong = Object.values(product).map(qty => qty)
+        
+        // for (let i = 0; i < data.length; i++) {
+            //     tong += SoLuong[i]
+            // }
+            // xxx.TotalQty(tong)
+            
+            let tong = 0
+        if (product) {
+            Object.values(product).forEach((value) => {
+                console.log(value);
+                    tong += value
+            })
+            xxx.TotalQty(tong)
+        }
     }
+
     const renderProduct = () => {
         if (product && product.length > 0) {
             return product.map((value, key) => {
                 const images = JSON.parse(value.image)
                 const firstImg = images[0]
-
-
                 return (
                     <div class="col-sm-4">
                         <div class="product-image-wrapper">
@@ -49,13 +67,13 @@ export default function Home() {
                                     <img src={"http://localhost/web2m/laravel8/laravel8/public/upload/product/13/" + firstImg} alt="" />
                                     <h2>${value.price}</h2>
                                     <p>{value.name}</p>
-                                    <a href="#" class="btn btn-default add-to-cart"><i class="fa fa-shopping-cart"></i>Add to cart</a>
+                                    <a class="btn btn-default add-to-cart"><i class="fa fa-shopping-cart"></i>Add to cart</a>
                                 </div>
                                 <div class="product-overlay">
                                     <div class="overlay-content">
                                         <h2>${value.price}</h2>
                                         <p>{value.name}</p>
-                                        <a id={`${value.id}`} class="btn btn-default add-to-cart" onClick={(e) => { handleProduct(e) }}><i class="fa fa-shopping-cart"></i>Add to cart</a>
+                                        <a id={`${value.id}`} class="btn btn-default add-to-cart" onClick={handleProduct}><i class="fa fa-shopping-cart"></i>Add to cart</a>
                                     </div>
                                 </div>
                             </div>
